@@ -6,13 +6,9 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class WeatherController : ControllerBase
+    public class WeatherController(IWeatherOpenDataHubService weatherService) : ControllerBase
     {
-        private readonly IWeatherOpenDataHubService _weatherService;
-        public WeatherController(IWeatherOpenDataHubService weatherService)
-        {
-            _weatherService = weatherService;
-        }
+        private readonly IWeatherOpenDataHubService _weatherService = weatherService;
 
         [HttpGet]
         public async Task<IActionResult> Get()

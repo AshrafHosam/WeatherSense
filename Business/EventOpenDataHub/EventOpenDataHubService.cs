@@ -9,13 +9,10 @@ namespace Business.EventOpenDataHub
         Task<EventShortResponseDto> GetEventsAsync();
     }
 
-    public class EventOpenDataHubService : IEventOpenDataHubService
+    public class EventOpenDataHubService(IEventOpenDataHubClient client) : IEventOpenDataHubService
     {
-        private readonly IEventOpenDataHubClient _client;
-        public EventOpenDataHubService(IEventOpenDataHubClient client)
-        {
-            _client = client;
-        }
+        private readonly IEventOpenDataHubClient _client = client;
+
         public async Task<EventShortResponseDto> GetEventsAsync()
         {
             return await _client.GetEventsAsync();
